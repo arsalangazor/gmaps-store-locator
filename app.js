@@ -4,7 +4,8 @@ const mongoose = require('mongoose');
 const Store = require('./api/models/store');
 const StoreService = require('./api/services/storeService');
 const storeService = new StoreService();
-const dotEnv = require('dotenv').config()
+const dotEnv = require('dotenv')
+dotEnv.config()
 const port = 3000
 
 
@@ -20,7 +21,7 @@ app.use(function (req, res, next) {
     next();
 });
 
-mongoose.connect('mongodb+srv://<YOUR_USERNAME>:<YOUR_PASSWORD>@cluster2.2vnbc.mongodb.net/<YOUR_DATABASE_NAME>?retryWrites=true&w=majority',{
+mongoose.connect(`mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@cluster2.2vnbc.mongodb.net/${process.env.MONGO_DATABASE_NAME}?retryWrites=true&w=majority`,{
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true
